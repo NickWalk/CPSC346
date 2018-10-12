@@ -75,15 +75,15 @@ void parent(int time_crit_sect, int time_non_crit_sect, int* shared)
    *shared = 1; // turn
    while((*(shared+2) == 1) && ((*shared) == 1))
    {
-   printf("before: turn = %i\n", *shared);
-   printf("before: pr0 = %i\n", *(shared+1));
-   printf("before: pr1 = %i\n", *(shared+2));
+   //printf("before: turn = %i\n", *shared);
+   //printf("before: pr0 = %i\n", *(shared+1));
+   //printf("before: pr1 = %i\n", *(shared+2));
    
     cs('p', time_crit_sect, shared);
     *(shared+1) = 0;
-    printf("after: turn = %i\n", *shared);
-   printf("after: pr0 = %i\n", *(shared+1));
-   printf("after: pr1 = %i\n", *(shared+2));
+    //printf("after: turn = %i\n", *shared);
+   //printf("after: pr0 = %i\n", *(shared+1));
+   //printf("after: pr1 = %i\n", *(shared+2));
    }
     
    non_cs(time_non_crit_sect); 
@@ -96,21 +96,21 @@ void child(int time_crit_sect, int time_non_crit_sect, int* shared)
  for (int i = 0; i < 10; i++)
   {
    *(shared+2) = 1; //pr1
-   fprintf(stderr, "pr1 just changed to 1!!!!!!!!!!!\n");
+   //fprintf(stderr, "pr1 just changed to 1!!!!!!!!!!!\n");
    *shared = 0; //turn
    while((*(shared+1) == 1) && ((*shared) == 0))
    {
-   	printf("before: turn = %i\n", *shared);
-   printf("before: pr0 = %i\n", *(shared+1));
-   printf("before: pr1 = %i\n", *(shared+2));
+   	//printf("before: turn = %i\n", *shared);
+  // printf("before: pr0 = %i\n", *(shared+1));
+   //printf("before: pr1 = %i\n", *(shared+2));
     //fprintf(stderr, "ran2\n"); 
    
     cs('c', time_crit_sect, shared);
     *(shared+2) = 0;
-     fprintf(stderr, "pr1 just changed to 0!!!!!!!!!!!\n");
-    printf("after: turn = %i\n", *shared);
-   printf("after: pr0 = %i\n", *(shared+1));
-   printf("after: pr1 = %i\n", *(shared+2));
+    // fprintf(stderr, "pr1 just changed to 0!!!!!!!!!!!\n");
+    //printf("after: turn = %i\n", *shared);
+   //printf("after: pr0 = %i\n", *(shared+1));
+   //printf("after: pr1 = %i\n", *(shared+2));
    }
 
    non_cs(time_non_crit_sect); 
